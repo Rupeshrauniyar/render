@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>IOE Examination</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css" />
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css" />
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css" />
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css" />
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css" />
+    <link rel="stylesheet" href="/stylesheets/font.css">
+    <link rel="stylesheet" href="/stylesheets/input-border.css">
+</head>
+
+<body class="bg-gray-200">
+    <header class="flex flex-col items-center justify-center">
+        <h3 class="text-blue-500 font-semibold text-3xl text-center mt-4">Pccoe Online Examination System 1.0</h3>
+    </header>
+    <form method="post" action="/teacher/exam/edit/<%= Exam._id %>" class="p-10 w-full h-full">
+        <div class="flex flex-col items-center justify-center">
+            <input type="text" placeholder="Exam Name" required name="ExamName"
+                class="border-none outline-none bg-[#efefef] w-[80%] rounded-lg mt-2 p-2" value="<%= Exam.ExamName %>">
+            <input type="number" placeholder="Total Questions" required name="TotalQuestions"
+                class="border-none outline-none bg-[#efefef] w-[80%] rounded-lg mt-2 p-2" value="<%=Exam.TotalQuestions%>">
+            <input type="number" placeholder="Exam Duration" required name="Duration"
+                class="border-none outline-none bg-[#efefef] w-[80%] rounded-lg mt-2 p-2" value="<%= Exam.Duration %>">
+            <input type="number" placeholder="Group-A Questions" required name="GroupAQuestions"
+                class="border-none outline-none bg-[#efefef] w-[80%] rounded-lg mt-2 p-2" value="<%= Exam.GroupAQuestions %>">
+            <input type="number" placeholder="Group-B Questions" required name="GroupBQuestions"
+                class="border-none outline-none bg-[#efefef] w-[80%] rounded-lg mt-2 p-2" value="<%= Exam.GroupBQuestions %>">
+            <select class="border-none outline-none bg-[#efefef] w-[80%] rounded-lg mt-2 p-2" name="Status" >
+                <% if (Exam.Status === "Publish") { %>
+                    <option><%= Exam.Status %></option>
+                    <option>Pending</option>
+               <% } else {%>
+                <option><%= Exam.Status %></option>
+                    <option>Publish</option>
+                <% } %>
+            </select>
+        </div>
+
+        <h3 class="text-2xl mt-4">Group A Questions</h3>
+        <% Exam.Questions.GroupA.forEach((questions,i) =>  {%>
+        <div class="mt-4">
+            <p>Q<%= i + 1 %>.
+                <input type="text" name="Questions[GroupA][<%= i %>][question]" value="<%= questions.question %>"
+                    placeholder="Question <%= i + 1 %>"
+                    class="bottom-border-input outline-none mt-6 bg-[#efefef] rounded-lg p-2 w-[80%]"></p>
+            <ul class="list-disc pl-5">
+                <% questions.options.forEach((options,j) => {%>
+                <li>
+                    <input type="text" name="Questions[GroupA][<%= i %>][options][]" placeholder="Option <%= j + 1 %>" value="<%= options %>"
+                        class="outline-none border-none bg-[#efefef] rounded-lg bottom-border-input p-2 mt-2 ml-2 w-[81%]"><br>
+                </li>
+                <% }) %>
+            </ul>
+            <div class="flex">
+                <p class="p-5 pl-8">Correct Option is:</p>
+                <% for (let j = 0; j < 4; j++) { %>
+                    <label class="p-5 cursor-pointer">
+                        <input type="radio" name="Questions[GroupA][<%= i %>][correctOption]" value="<%= j %>"
+                            <% if (questions.correctOption === j) { %>checked<% } %>> Option <%= j + 1 %>
+                    </label><br>
+                    <% } %>
+            </div>
+        </div>
+        <% }) %>
+
+        <h3 class="text-2xl mt-4">Group B Questions</h3>
+        <% Exam.Questions.GroupB.forEach((questions,i) => { %>
+        <div class="mt-4">
+            <p>Q<%= i + 1 %>.
+                <input type="text" name="Questions[GroupB][<%= i %>][question]"
+                    placeholder="Question <%= i + 1 %>"
+                    class="bottom-border-input outline-none mt-6 bg-[#efefef] rounded-lg p-2 w-[80%]" value="<%= questions.question %>"></p>
+            <ul class="list-disc pl-5">
+                <% questions.options.forEach((options,j) =>{ %>
+                <li>
+                    <input type="text" name="Questions[GroupB][<%= i %>][options][]" placeholder="Option <%= j + 1 %>"
+                        class="outline-none border-none bg-[#efefef] rounded-lg bottom-border-input p-2 mt-2 ml-2 w-[81%]" value="<%= options %>"><br>
+                </li>
+                <% }) %>
+            </ul>
+            <div class="flex">
+                <p class="p-5 pl-8">Correct Option is:</p>
+                <% for (let j = 0; j < 4; j++) { %>
+                    <label class="p-5 cursor-pointer">
+                        <input type="radio" name="Questions[GroupB][<%= i %>][correctOption]" value="<%= j %>"
+                            <% if (questions.correctOption === j) { %>checked<% } %>> Option <%= j + 1 %>
+                    </label><br>
+                    <% } %>
+            </div>
+        </div>
+        <% }) %>
+
+        <div class="items-center justify-center flex mt-6">
+            <input type="submit" value="Save"
+                class="bg-blue-500 p-2 pr-5 pl-5 rounded-lg cursor-pointer hover:bg-blue-600 text-white">
+        </div>
+    </form>
+</body>
+
+</html>

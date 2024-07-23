@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>IOE Examination</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css" />
+  <link rel="stylesheet" href="/stylesheets/font.css">
+</head>
+<div class="flex flex-col items-center">
+  <form method="post" enctype="application/x-www-form-urlencoded" action="/teacher"
+  class="hidden fixed flex flex-col text-center bg-gray-200 w-[30vw] h-[30vh] rounded-lg mt-16" id="form">
+  <p class="text-blue-500 text-2xl font-semibold mt-4">Enter the Login Code.</p>
+  <div class="flex flex-col items-center justify-center">
+    <input type="number" placeholder="TeacherId" name="TeacherId"
+      class="w-[60%] bg-[#efefef] border-none outline-none rounded-md p-2 ">
+    <input type="password" placeholder="Login Code" name="LoginCode"
+      class="w-[60%] bg-[#efefef] border-none outline-none rounded-md p-2 mt-2">
+      <div class="flex items-center justify-center">
+    <input type="submit" value="Ok"
+      class="bg-blue-500 p-2 pl-10 pr-10 mr-2 text-white rounded-lg hover:bg-blue-600 mt-4 cursor-pointer" />
+    </form>
+      <h3 class="bg-red-500 p-2 pr-5 pl-5 text-white rounded-lg hover:bg-red-600 mt-4 cursor-pointer" id="cancel">Cancel</h3>
+      </div>
+  </div>
+
+</div>
+
+
+<body class="">
+
+
+
+  <header class="flex flex-col items-center justify-center ">
+    <h3 class="text-blue-500 font-semibold text-3xl text-center mt-4">Pccoe Online Examination System 1.0</h3>
+    <nav class="p-8 bg-blue-500 w-[95vw] rounded-lg mt-4">
+      <span class="flex items-center">
+        <p class="text-zinc-200 text-lg font-bold">Welcome!</p>
+        <br>
+
+      </span>
+      <p class="text-zinc-200 text-md font-semibold">This is teacher page for the management of examinations to be taken
+        in future.</p>
+      <h3 class="text-red-700 text-md font-medium">If you have mistakenly got access to this page then please inform
+        this to your teacher or contact on the given details provided on the website.</h3>
+    </nav>
+  </header>
+  <main class="p-10">
+    <p class="text-blue-500 font-bold text-3xl">Teachers Note:</p>
+    <ul class="list-disc pl-5">
+      <li>You have to provide a appropriate question to the student.</li>
+      <li>You have to provide 4 options to a appropriate question.</li>
+      <li>Among 4 options a single option must be the correct option for the appropriate question.</li>
+      <li>You can change your Question/Option during the creation of question before exam period.</li>
+      <li>Information along with total questions,groups of related question must be specified.</li>
+      <li>You can monitor students attempting the examination,the number of questions attempted by them,grades scored by
+        them.</li>
+    </ul>
+    <div class="flex items-center justify-center mt-16">
+      <button class="bg-blue-500 p-2 text-white rounded-lg cursor-pointer hover:bg-blue-600" id="create">Create a exam
+        <i class="fa-light fa-plus"></i></button>
+     </div>
+    
+      <p class="text-blue-600 text-3xl">Examinations</p>
+      <% Exams.forEach(Exam=> { %>
+         <div class="flex items-center justify-center w-full">
+          <div class="flex items-center justify-between p-5 bg-blue-500 text-white rounded-lg mt-5 w-[90%]">
+              <span class="flex flex-col items-center justify-center">
+                  <p>Exam Name</p>
+                  <p class="mt-2"><%= Exam.ExamName %></p>
+              </span>
+              <span class="flex flex-col items-center justify-center">
+                  <p>Total Questions</p>
+                  <p class="mt-2"><%= Exam.TotalQuestions %></p>
+              </span>
+              <span class="flex flex-col items-center justify-center">
+                  <p>Group-A Questions</p>
+                  <p class="mt-2"><%= Exam.GroupAQuestions %></p>
+              </span>
+              <span class="flex flex-col items-center justify-center">
+                  <p>Group-B Questions</p>
+                  <p class="mt-2"><%= Exam.GroupBQuestions %></p>
+              </span>
+              <span class="flex flex-col items-center justify-center">
+                <p>Participants</p>
+                <p class="mt-2"><%= Exam.Participants.length %></p>
+            </span>
+              
+              <span class="flex flex-col items-center justify-center">
+                  <p>Status</p>
+                  <p class="mt-2"><%= Exam.Status %></p>
+              </span>
+              
+          </div>
+          <div class="flex items-center justify-center mt-5">
+            <a href="/teacher/exam/edit/<%= Exam._id %>"><button class="bg-blue-500 p-2 pr-4 pl-4 flex items-center justify-center text-white rounded-lg cursor-pointer hover:bg-blue-600 ml-2">Edit <i class="fa-thin fa-pencil ml-2"></i></button></a>
+            <form method="post" action="/teacher/exam/delete/<%= Exam._id %>">
+              <a href="/teacher/exam/delete/<%= Exam._id %>"><button class="bg-red-500 p-2 pr-4 pl-4 flex items-center justify-center text-white rounded-lg cursor-pointer hover:bg-red-600 ml-2">Delete <i class="fa-thin fa-trash ml-2"></i></button></a>
+
+            </form>
+       </div>
+          </div>
+              <% }) %>
+
+
+  
+  </main>
+</body>
+<script src="/javascripts/create.js"></script>
+
+</html>

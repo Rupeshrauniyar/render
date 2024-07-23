@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css" />
+     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css" />
+     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css" />
+     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css" />
+     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css" />
+     <link rel="stylesheet" href="/stylesheets/font.css">
+    <title>IOE Examination | login</title>
+</head>
+
+<body class="bg-[#efefef] flex items-center justify-center">
+    <form method="post" class="w-full h-full mt-32" action="/teacher/login">
+        <div
+            class="flex w-[400px] h-[400px] flex-col p-4 mx-auto bg-white rounded-md shadow-md flex flex-col items-center justify-center">
+            <h3 class="text-4xl font-extrabold">Teacher Login</h3>
+            <input type="text" name="TeacherId" placeholder="TeacherId"
+                class="w-[280px] mt-6 border-none outline-none bg-[#efefef] p-2 rounded-md" autocomplete="false"
+                spellcheck="false">
+                <input type="password" name="LoginCode" placeholder="Login Code"
+                class="w-[280px] mt-2 border-none outline-none bg-[#efefef] p-2 rounded-md" autocomplete="false"
+                spellcheck="false">
+                <span class="flex items-center">
+                    <input type="password" name="Password" placeholder="Password" id="password"
+                    class="w-[280px] mt-2 border-none outline-none bg-[#efefef] p-2 rounded-md ml-8" autocomplete="false"
+                    spellcheck="false"><i class="fa-light fa-eye ml-4 cursor-pointer" id="eyes"></i>
+                </span>
+            
+                <p class="text-center">Dont have an access to a teacher account? Login to your normal account.<a class="text-blue-500"href="/login">Login</a></p>
+            <input type="submit" value="Login"
+                class="bg-blue-500 text-white p-2 rounded-md mt-2 hover:bg-blue-600 cursor-pointer">
+        </div>
+
+    </form>
+</body>
+<script src="/javascripts/register.js"></script>
+</html>

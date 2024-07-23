@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>IOE Examination</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css" />
+     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css" />
+     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css" />
+     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css" />
+     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css" />
+     <link rel="stylesheet" href="/stylesheets/font.css">
+</head>
+<body class="bg-[#efefef]">
+  <header class="flex flex-col items-center justify-center ">
+    <h3 class="text-blue-500 font-semibold text-3xl text-center mt-4">Pccoe Online Examination System 1.0</h3>
+    <nav class="p-8 bg-blue-500 w-[95vw] rounded-lg mt-4">
+      <span class="flex items-center">
+        <p class="text-zinc-200 text-lg font-bold">Welcome!</p> <p class=" text-white ml-1"><%= Student.FullName %>. </p>
+        <br>
+ 
+      </span>
+      <p class="text-zinc-200 text-md font-semibold">This is a mock examination for the preparation for IOE Entrance Examination. </p>
+    </nav> 
+  </header>
+  <main class="p-10 ">
+    <p class="text-blue-500 font-bold text-3xl">Examination Note:</p>
+    <ul class="list-disc pl-5">
+      <li>You have to check the radio button to correct option.</li>
+      <li>Negative marking will be applied on the wrong marking.</li>
+      <li>Click on the Next/Previous button to paginate</li>
+      <li>You can change your option during the exam period.</li>
+      <li>Information along with time remaining,total attempted questions, total questions will be displayed on the top of your page.</li>
+      <li>The answers will be automatically submitted when the time is over.</li>
+  </ul>
+ <div class="exam-page mt-10 flex flex-col  justify-center ">
+  <p class="text-blue-500 font-semibold text-2xl pl-16">Examinations.</p>
+  <% Exams.forEach(Exam=> { %>
+    <div class="flex flex-col items-center justify-center w-full">
+     <div class="flex  items-center justify-between p-5 bg-blue-500 text-white rounded-lg mt-5 w-[90%]">
+         <span class="flex flex-col items-center justify-center">
+             <p>Exam Name</p>
+             <p class="mt-2"><%= Exam.ExamName %></p>
+         </span>
+         <span class="flex flex-col items-center justify-center">
+             <p>Total Questions</p>
+             <p class="mt-2"><%= Exam.TotalQuestions %></p>
+         </span>
+         <span class="flex flex-col items-center justify-center">
+             <p>Group-A Questions</p>
+             <p class="mt-2"><%= Exam.GroupAQuestions %></p>
+         </span>
+         <span class="flex flex-col items-center justify-center">
+             <p>Group-B Questions</p>
+             <p class="mt-2"><%= Exam.GroupBQuestions %></p>
+         </span>
+         <span class="flex flex-col items-center justify-center">
+           <p>Participants</p>
+           <p class="mt-2"><%= Exam.Participants.length %></p>
+       </span>
+         
+         <span class="flex flex-col items-center justify-center">
+             <p>Status</p>
+             <p class="mt-2"><%= Exam.Status %></p>
+         </span>
+         
+        <a href="/exam/<%= Exam._id %>">
+          <button class="p-2 bg-green-500 rounded-lg hover:bg-green-600">Take a test</button>
+        </a>
+     </div>
+     <% }) %>
+ </div>
+  
+  </main>
+  
+</body>
+</html>
